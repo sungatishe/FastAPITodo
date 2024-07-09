@@ -1,0 +1,50 @@
+{% include 'layout.html' %}
+
+<div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+            Your Todos!
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">List of your Todos!</h5>
+            <p class="card-text">Information regarding stuff that needs to be complete</p>
+
+            <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Info</th>
+      <th scope="col">Actions</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+{% for i in todos %}
+{% if i.complete == False %}
+<tr class="pointer" >
+      <td>{{ loop.index }}</td>
+      <td>{{ i. title}} <br>  {{ i.description }} </td>
+      <td><button onclick="window.location.href='complete/{{ i.id }}'" type="button" class="btn btn-success">Complete</button>
+          <button onclick="window.location.href='edit-todo/{{ i.id }}'" type="button" class="btn btn-info">Edit</button>
+      </td>
+</tr>
+{% else %}
+<tr class="pointer" >
+      <td>{{ loop.index }}</td>
+      <td class="strike-through-td">{{ i. title}} <br>  {{ i.description }} </td>
+      <td><button onclick="window.location.href='complete/{{ i.id }}'" type="button" class="btn btn-success">Undo</button>
+          <button onclick="window.location.href='edit-todo/{{ i.id }}'" type="button" class="btn btn-info">Edit</button>
+      </td>
+</tr>
+{% endif %}
+{% endfor %}
+
+  </tbody>
+</table>
+
+            <a href="{{ url_for('addtodo') }}" class="btn btn-primary">Add a new Todo!</a>
+        </div>
+    </div>
+</div>
+
