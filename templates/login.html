@@ -6,7 +6,20 @@
             Login
         </div>
         <div class="card-body">
-            <form>
+
+            {% if msg %}
+            {% if msg == "Logout successful" or msg == "User successfully created" %}
+            <div class="alert alert-success">
+                {{ msg }}
+            </div>
+            {% else %}
+            <div class="alert alert-danger">
+                {{ msg }}
+            </div>
+            {% endif %}
+            {% endif %}
+
+            <form method="POST" action="/auth/">
                 <div class="form-group">
                     <label>Username</label>
                     <input type="text" class="form-control"
@@ -20,7 +33,7 @@
             </form>
         </div>
         <div class="card-footer text-muted">
-            <a href="#"> Register? </a>
+            <a href="{{ url_for('register') }}"> Register? </a>
         </div>
     </div>
 </div>
